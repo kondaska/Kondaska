@@ -1,0 +1,2 @@
+let kondaska = [];
+let system = [];

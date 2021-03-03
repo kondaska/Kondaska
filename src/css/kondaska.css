@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+:root {
+    --font: 'Roboto';
+    --code: 'Roboto Mono';
+    --serif: 'Roboto Slab';
+    --condensed: 'Roboto Condensed';
+
+    --mainColor: #181A1B;
+    --accentDark: #003049;
+    --accentRed: #D62828;
+    --accentOrange: #F77F00;
+    --accentYellow: #FCBF49;
+    --accentWhite: #EAE2B7;
+}
+
+body {
+    margin: 0;
+}
