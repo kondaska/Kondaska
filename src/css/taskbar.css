@@ -1,0 +1,38 @@
+div#taskbar {
+    background-color: var(--accentDark);
+    position: absolute;
+    height: 8vh;
+    width: 90vw;
+    margin-top: 90vh;
+    margin-left: 5vw;
+    border: hidden;
+    border-radius: 16px;
+    display: flex;
+}
+
+button.taskbar.button {
+    height: 6vh;
+    width: 6vh;
+    margin-top: 1vh;
+    margin-left: 1vh;
+    border: hidden;
+    border-radius: 10px;
+    background-color: var(--accentWhite);
+    transition: 0.5s;
+}
+
+button.taskbar.button:hover {
+    height: 6.5vh;
+    width: 6.5vh;
+    margin-top: 0.75vh;
+    margin-left: 0.75vh;
+    margin-right: 0.75vh;
+}
+
+button.taskbar:focus {
+    border: hidden;
+}
+
+button.taskbar:active {
+
+}
