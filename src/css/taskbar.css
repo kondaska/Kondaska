@@ -10,6 +10,21 @@ div#taskbar {
     display: flex;
 }
 
+div.taskbar.spacer {
+    position: absolute;
+    height: 6vh;
+    width: 1px;
+    background-color: var(--accentWhite);
+    margin-left: 45vw;
+    margin-right: 16px;
+    margin-top: 1vh;
+}
+
+div.taskbar.button.collection {
+    display: flex;
+    width: 45vw;
+}
+
 button.taskbar.button {
     height: 6vh;
     width: 6vh;
@@ -17,7 +32,8 @@ button.taskbar.button {
     margin-left: 1vh;
     border: hidden;
     border-radius: 10px;
-    background-color: var(--accentWhite);
+    background-color: var(--accentRed);
+    outline: none;
     transition: 0.5s;
 }
 
@@ -34,5 +50,20 @@ button.taskbar:focus {
 }
 
 button.taskbar:active {
+    background-color: var(--accentWhite);
+}
 
+div.taskbar.control {
+    font-family: var(--code);
+    color: white;
+    font-size: 20px;
+}
+
+div.taskbar.control {
+    margin-left: 16px;
+    margin-top: 0px;
+}
+
+p.taskbar.control.timeDisplay {
+    margin: 0;
 }
