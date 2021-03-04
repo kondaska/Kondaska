@@ -1,6 +1,14 @@
 let kondaska = [];
 let system = [];
 
+system.desktop = [];
+system.desktop.window = {
+    'index': 0,
+    'views': []
+}
+
+
+// Importing prototype files
 kondaska.protoFiles = [];
 kondaska.protoFiles.html = [
     'assets/prototypes/window.html'
