@@ -1,4 +1,8 @@
-let view = []
+let view = [];
+
+view.config = {
+    contentPlaceholder: '<!--INSERT_CONTENT_HERE-->'
+};
 
 view.conditions = function(name, title, content, classes, resizable, width, height) {
     let errorCount = 0;
@@ -16,6 +20,7 @@ view.conditions = function(name, title, content, classes, resizable, width, heig
     if (typeof resizable !== "boolean") { throw new Error('Resizable must be a boolean') };
     if (isNaN(width)) { throw new Error('Width must be an interger') };
     if (isNaN(height)) { throw new Error('Height must be an interger') };
+    //if (content.includes(view.config.contentPlaceholder) === false) { throw new Error('Content does not include a content placeholder')}
     return errorCount;
 };
 
@@ -41,10 +46,14 @@ class View {
             classList += ' ' + this.classes[i];
         };
         const id = 'windowIndex-' + this.index;
+        const content = kondaska.files.html.window.replace(view.config.contentPlaceholder, this.content)
+        console.log(content)
+        console.log(view.config.contentPlaceholder)
+        console.log(this.content)
         const newWindow = document.createElement('div');
         newWindow.setAttribute('id', id);
         newWindow.setAttribute('class', classList);
-        newWindow.innerHTML = this.content;
+        newWindow.innerHTML = content;
         document.querySelector('#desktop').appendChild(newWindow);
         this.info.id = id;
         this.info.class = classList;
