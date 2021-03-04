@@ -1,2 +1,30 @@
-div.window {
+.window {
+    color: white;
+    font-family: var(--code);
+    background-color: var(--mainColor);
+    resize: none;
+    overflow: hidden;
+    border: solid var(--mainColor);
+    border-width: 10px;
+    border-radius: 16px;
+}
+
+div.window.header {
+    background-color: var(--mainColor);
+    border: none;
+    border-radius: 0;
+}
+
+span.window {
+    background-color: var(--mainColor);
+    border: none;
+    border-radius: 0;
+}
+
+div.window.content {
+    background-color: blue;
+    border: none;
+    resize: both;
+    width: 500px;
+    height: 500px;
 }
