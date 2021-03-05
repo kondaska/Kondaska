@@ -41,7 +41,7 @@ class View {
     };
 
     create() {
-        let classList = 'window ' + this.name + ' ' + this.title;
+        let classList = 'view-window ' + this.name + ' ' + this.title;
         for (let i = 0; i < this.classes; i++) {
             classList += ' ' + this.classes[i];
         };

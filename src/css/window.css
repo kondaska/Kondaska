@@ -1,4 +1,9 @@
-.window {
+div.view-window {
+    width: fit-content;
+    height: fit-content;
+}
+
+div.window {
     color: white;
     font-family: var(--code);
     background-color: var(--mainColor);
@@ -13,6 +18,47 @@ div.window.header {
     background-color: var(--mainColor);
     border: none;
     border-radius: 0;
+    display: flex;
+    padding: 0;
+}
+
+p.window.buttons {
+    border: none;
+    border-radius: 0;
+    width: 15%;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+button.window.buttons {
+    border-radius: 50%;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: 1px;
+    margin-bottom: 2px;
+    justify-self: right;
+    align-self: top;
+}
+
+button.window.buttons:focus {
+    outline: none;
+}
+
+button.window.buttons:hover {
+    filter: contrast(5000%)
+}
+
+button.window.buttons.close {
+    border: solid var(--accentRed);
+    border-width: 10px;
+}
+
+button.window.buttons.minimize {
+    border: solid var(--accentOrange);
+    border-width: 10px;
 }
 
 span.window {
@@ -22,9 +68,10 @@ span.window {
 }
 
 div.window.content {
-    background-color: blue;
+    /*background-color: blue;*/ /* For testing puroposes */
     border: none;
     resize: both;
+    min-width: 340px;
     width: 500px;
     height: 500px;
 }
