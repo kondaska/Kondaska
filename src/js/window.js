@@ -1,8 +1,27 @@
 let view = [];
 
 view.config = {
-    contentPlaceholder: '<!--INSERT_CONTENT_HERE-->'
+    contentPlaceholder: '<!--INSERT_CONTENT_HERE-->',
+    headerIDPlaceholder: 'myHeaderID'
 };
+view.initial = []
+view.initial.x;
+view.initial.y;
+
+view.drag = function(e) {
+    
+}
+
+view.drag.start = function(e) {
+    view.initial.x = e.clientX;
+    view.initial.y = e.clientY;
+    console.log(view.initial.x)
+    console.log(e.target)
+}
+
+view.drag.end = function(e) {
+
+}
 
 view.conditions = function(name, title, content, classes, resizable, width, height) {
     let errorCount = 0;
@@ -46,7 +65,8 @@ class View {
             classList += ' ' + this.classes[i];
         };
         const id = 'windowIndex-' + this.index;
-        const content = kondaska.files.html.window.replace(view.config.contentPlaceholder, this.content)
+        const headerID = id + 'header'
+        const content = kondaska.files.html.window.replace(view.config.contentPlaceholder, this.content).replace(view.config.headerIDPlaceholder, headerID)
         console.log(content)
         console.log(view.config.contentPlaceholder)
         console.log(this.content)
@@ -58,6 +78,9 @@ class View {
         this.info.id = id;
         this.info.class = classList;
         this.created = true;
+        newWindow.addEventListener('mousedown', view.drag.start, false)
+        newWindow.addEventListener('mouseup', view.drag.end, false)
+        newWindow.addEventListener('mousemove', view.drag, false)
         if (this.errorCount > 0) { console.warn('While constructing this view, there were ' + this.errorCount + ' non critical errors') };
     };
 
