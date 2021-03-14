@@ -25,13 +25,13 @@ view.drag.end = function(e) {
 
 view.conditions = function(name, title, content, classes, resizable, width, height) {
     let errorCount = 0;
-    if (name === undefined) { name = 'undefined name'; console.error('Name was undefined, set to default value'); errorCount++ };
-    if (title === undefined) { title = 'undefined title'; console.error('Title was undefined, set to default value'); errorCount++ };
-    if (content === undefined) { content = ''; console.error('Content was undefined, set to default value'); errorCount++ };
-    if (classes === undefined) { classes = []; console.error('Classes was undefined, set to default value'); errorCount++ };
-    if (resizable === undefined) { resizable = true; console.error('Resizable was undefined, set to default value'); errorCount++ };
-    if (width === undefined) { width = 50; console.error('Width was undefined, set to default value'); errorCount++ };
-    if (height === undefined) { height = 50; console.error('Height was undefined, set to default value'); errorCount++ };
+    if (name === undefined) { name = 'undefined name'; kondaska.console.error('Name was undefined, set to default value'); errorCount++ };
+    if (title === undefined) { title = 'undefined title'; kondaska.console.error('Title was undefined, set to default value'); errorCount++ };
+    if (content === undefined) { content = ''; kondaska.console.error('Content was undefined, set to default value'); errorCount++ };
+    if (classes === undefined) { classes = []; kondaska.console.error('Classes was undefined, set to default value'); errorCount++ };
+    if (resizable === undefined) { resizable = true; kondaska.console.error('Resizable was undefined, set to default value'); errorCount++ };
+    if (width === undefined) { width = 50; kondaska.console.error('Width was undefined, set to default value'); errorCount++ };
+    if (height === undefined) { height = 50; kondaska.console.error('Height was undefined, set to default value'); errorCount++ };
     if (typeof name !== "string") { throw new Error('Name must be a string') };
     if (typeof title !== "string") { throw new Error('Title must be a string') };
     if (typeof content !== "string") { throw new Error('Content must be a string') };
