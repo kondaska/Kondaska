@@ -38,11 +38,7 @@ button.taskbar.button {
 }
 
 button.taskbar.button:hover {
-    height: 6.5vh;
-    width: 6.5vh;
-    margin-top: 0.75vh;
-    margin-left: 0.75vh;
-    margin-right: 0.75vh;
+    transform: scale(1.1);
 }
 
 button.taskbar:focus {
