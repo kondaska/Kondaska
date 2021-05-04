@@ -1,0 +1,20 @@
+/* Generic */
+
+body {
+    background-color: var(--mainColor);
+    margin: 0;
+}
+
+/* Desktop */
+
+main {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+}
+
+/* Taskbar */
+
+footer {
+    background-color: var(--accentDark);
+}
