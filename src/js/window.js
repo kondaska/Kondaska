@@ -4,24 +4,46 @@ view.config = {
     contentPlaceholder: '<!--INSERT_CONTENT_HERE-->',
     headerIDPlaceholder: 'myHeaderID'
 };
-view.initial = []
-view.initial.x;
-view.initial.y;
 
-view.drag = function(e) {
-    
+view.drag = function(e, id) {
+    if (!view.drag.active) { return }
+    const transX = e.clientX - view.drag.initialX
+    const transY = e.clientY - view.drag.initialY
+    console.log(`(${transX}, ${transY})`)
+    view.drag.move(id, transX, transY)
 }
 
-view.drag.start = function(e) {
-    view.initial.x = e.clientX;
-    view.initial.y = e.clientY;
-    console.log(view.initial.x)
-    console.log(e.target)
+view.drag.start = function(e, id) {
+    view.drag.initialX = e.clientX;
+    view.drag.initialY = e.clientY;
+    console.log(view.drag.initialX)
+    view.drag.active = true;
+    view.drag.item = document.querySelector(`div#${id}`)
+    console.log(view.drag.item)
 }
 
-view.drag.end = function(e) {
-
+view.drag.stop = function(e, id) {
+    view.drag.initialX = view.drag.currentX;
+    view.drag.initialY = view.drag.currentY;
+    view.drag.active = false;
 }
+
+view.drag.move = function(id, x, y) {
+    const el = document.querySelector(`div#${id}`).style
+    marginX = (el.marginLeft.split(''))
+    console.log(marginX)
+    const transX = `${marginX + x}px`
+    const transY = `${el.marginTop + y}px`
+    console.log(`${id}: (${transX}, ${transX})`)
+    /*
+    el.marginLeft = transX;
+    el.marginTop = transY
+    */
+}
+
+view.drag.active = false;
+view.drag.offsetX = 0;
+view.drag.offsetY = 0;
 
 view.conditions = function(name, title, content, classes, resizable, width, height) {
     let errorCount = 0;
@@ -65,11 +87,8 @@ class View {
             classList += ' ' + this.classes[i];
         };
         const id = 'windowIndex-' + this.index;
-        const headerID = id + 'header'
+        const headerID = `${id}-header`
         const content = kondaska.files.html.window.replace(view.config.contentPlaceholder, this.content).replace(view.config.headerIDPlaceholder, headerID)
-        console.log(content)
-        console.log(view.config.contentPlaceholder)
-        console.log(this.content)
         const newWindow = document.createElement('div');
         newWindow.setAttribute('id', id);
         newWindow.setAttribute('class', classList);
@@ -78,9 +97,15 @@ class View {
         this.info.id = id;
         this.info.class = classList;
         this.created = true;
-        newWindow.addEventListener('mousedown', view.drag.start, false)
-        newWindow.addEventListener('mouseup', view.drag.end, false)
-        newWindow.addEventListener('mousemove', view.drag, false)
+        /*
+        document.querySelector(`div#${headerID}`).addEventListener('mousedown', view.drag.start)
+        document.querySelector(`div#${headerID}`).addEventListener('mousemove', view.drag)
+        document.querySelector(`div#${headerID}`).addEventListener('mouseup', view.drag.stop)
+        */
+        document.querySelector(`div#${headerID}`).addEventListener('mousedown', evt => { view.drag.start(evt, this.info.id) })
+        document.querySelector(`div#${headerID}`).addEventListener('mouseup', evt => { view.drag.stop(evt, this.info.id) })
+        document.querySelector(`div#${headerID}`).addEventListener('mousemove', evt => { view.drag(evt, this.info.id) })
+        document.querySelector(`div#${id} button.window.buttons.close`).addEventListener('click', _ => { this.close() })
         if (this.errorCount > 0) { console.warn('While constructing this view, there were ' + this.errorCount + ' non critical errors') };
     };
 
@@ -88,5 +113,6 @@ class View {
         const element = document.querySelector('div#' + this.info.id);
         element.remove();
         this.created = false;
+        kondaska.console.log(`Succesfully closed ${this.name} - ${this.title}`)
     };
 }

@@ -68,7 +68,7 @@ span.window {
 }
 
 div.window.content {
-    /*background-color: blue;*/ /* For testing puroposes */
+    background-color: blue; /* For testing puroposes */
     border: none;
     resize: both;
     min-width: 340px;
