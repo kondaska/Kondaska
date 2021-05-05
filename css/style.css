@@ -14,6 +14,7 @@ div.view.container {
     display: none;
     left: 0px;
     right: 0px;
+    filter: drop-shadow(0 0 10px #121212);
 }
 
 div.view {
@@ -102,5 +103,41 @@ main {
 /* Taskbar */
 
 footer {
-    background-color: var(--accentDark);
+    background-color: var(--taskbar-color);
+    position: absolute;
+    z-index: 100000;
+    height: 8vh;
+    width: 90vw;
+    bottom: 16px;
+    margin-left: 5vw;
+    border: hidden;
+    border-radius: 16px;
+    display: flex;
+    backdrop-filter: blur(10px);
+    filter: drop-shadow(0 0 10px #121212);
+    justify-content: space-between;
+    padding: 8px;
+}
+
+button.taskbar.button {
+    height: 6vh;
+    width: 6vh;
+    border: hidden;
+    border-radius: 10px;
+    background-color: var(--accentRed);
+    outline: none;
+    transition: 0.5s;
+    align-self: center;
+}
+
+button.taskbar.button:hover {
+    transform: scale(1.1);
+}
+
+button.taskbar:focus {
+    border: hidden;
+}
+
+button.taskbar:active {
+    background-color: var(--accentWhite);
 }

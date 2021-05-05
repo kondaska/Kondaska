@@ -21,7 +21,7 @@
     /* System Colors */
     --background: #181A1B;
     --window-border-color: var(--accentDark);
-    --taskbar-color: var(--accentDark)
+    --taskbar-color: #003049cc;
 }
 
 body {

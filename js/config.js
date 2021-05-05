@@ -1,7 +1,6 @@
 /* Configuration */
 const config = [];
 
-
 /* Defaults */
 const defaults = [];
 

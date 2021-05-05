@@ -3,9 +3,9 @@ const system = [];
 system.version = {
     'state': 'Alpha',
     'version': '1.0.0'
-}
+};
 system.views = [];
-system.lastZIndex = 0
+system.lastZIndex = 0;
 
 /* Kondaska Shell */
 const shell = [];
@@ -129,6 +129,7 @@ class View {
         content.classList = 'view content';
         content.style.width = this.width;
         content.style.height = this.height;
+        content.innerHTML = this.content;
         if (!this.resizable) { content.style.resize = 'none' };
 
         container.appendChild(content);
@@ -148,11 +149,26 @@ class View {
     close() {
         this.container.remove();
         const index = system.views.findIndex( ({ id }) => id === this.id );
-        system.views.splice(index, 1)
+        system.views.splice(index, 1);
+        if (system.views.length === 0) { system.lastZIndex = 0 }
     };
 };
 
-/* Boot */
+/* Taskbar */
+
+// Taskbar button
+const TaskButton = class {
+    constructor() {};
+
+    create() {
+        const btn = document.createElement('button');
+        btn.classList = 'taskbar button';
+        document.getElementsByTagName('footer')[0].appendChild(btn);
+        return btn;
+    };
+};
+
+/* Boot / Initiation */
 
 const init = function() {
     document.title += ` | ${system.version.state} ${system.version.version}`;
