@@ -92,7 +92,7 @@ class View {
         header.appendChild(buttons);
 
         header.addEventListener('mousedown', evt => {
-            evt.preventDefault()
+            evt.preventDefault();
             this.touch = true;
             this.container.style.zIndex = system.lastZIndex +1;
             system.lastZIndex++;
@@ -129,7 +129,7 @@ class View {
         content.classList = 'view content';
         content.style.width = this.width;
         content.style.height = this.height;
-        content.innerHTML = this.content;
+        content.appendChild(this.content);
         if (!this.resizable) { content.style.resize = 'none' };
 
         container.appendChild(content);
