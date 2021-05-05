@@ -93,16 +93,11 @@ class View {
             this.touch = true;
         });
 
-        header.addEventListener('mouseup', _ => {
+        document.addEventListener('mouseup', _ => {
             this.touch = false;
         });
 
-        header.addEventListener('mouseleave', _ => {
-            if (!this.touch) { return };
-            this.touch = false;
-        });
-
-        header.addEventListener('mousemove', evt => {
+        document.addEventListener('mousemove', evt => {
             if (!this.touch) { return };
 
             evt.preventDefault()

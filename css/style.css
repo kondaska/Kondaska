@@ -34,7 +34,11 @@ div.view.header {
     display: flex;
     justify-content: space-between;
     padding: 0;
-    cursor: pointer;
+    cursor: grab;
+}
+
+div.view.header:active {
+    cursor: grabbing;
 }
 
 div.view.content {
@@ -65,6 +69,7 @@ button.view.buttons {
     margin-bottom: 2px;
     justify-self: right;
     align-self: top;
+    cursor: pointer;
 }
 
 button.view.buttons:focus {
