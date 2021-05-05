@@ -5,6 +5,7 @@ system.version = {
     'version': '1.0.0'
 }
 system.views = [];
+system.lastZIndex = 0
 
 /* Kondaska Shell */
 const shell = [];
@@ -93,6 +94,8 @@ class View {
         header.addEventListener('mousedown', evt => {
             evt.preventDefault()
             this.touch = true;
+            this.container.style.zIndex = system.lastZIndex +1;
+            system.lastZIndex++;
         });
 
         document.addEventListener('mouseup', _ => {
