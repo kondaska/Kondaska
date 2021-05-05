@@ -37,11 +37,13 @@ class View {
         this.width = properties.width;
         this.height = properties.height;
         this.data = properties.data;
+        this.id = Date.now()
 
         if (typeof this.resizable !== "boolean") { this.resizable = defaults.viewResize; shell.warn(`Property "resizeable" was not defined or was not a boolean`, 'viewhandler') };
         if (typeof this.width !== "number") { this.width = defaults.viewWidth; shell.warn(`Property "width" was not defined or was not an interger`, 'viewhandler') };
         if (typeof this.height !== "number") { this.width = defaults.viewHeight; shell.warn(`Property "height" was not defined or was not an interger`, 'viewhandler') };;
 
+        system.views.push(this)
     };
 
     create() {
@@ -142,6 +144,8 @@ class View {
 
     close() {
         this.container.remove();
+        const index = system.views.findIndex( ({ id }) => id === this.id );
+        system.views.splice(index, 1)
     };
 };
 
