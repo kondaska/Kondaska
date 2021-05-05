@@ -11,6 +11,7 @@ body {
 div.view.container {
     width: fit-content;
     height: fit-content;
+    display: none;
 }
 
 div.view {
@@ -29,6 +30,7 @@ div.view.header {
     border: none;
     border-radius: 0;
     display: flex;
+    justify-content: space-between;
     padding: 0;
 }
 
@@ -40,6 +42,44 @@ div.view.content {
     min-height: 150px;
     width: 500px;
     height: 500px;
+}
+
+p.view.button-container {
+    border: none;
+    border-radius: 0;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+button.view.buttons {
+    border-radius: 50%;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: 1px;
+    margin-bottom: 2px;
+    justify-self: right;
+    align-self: top;
+}
+
+button.view.buttons:focus {
+    outline: none;
+}
+
+button.view.buttons:hover {
+    filter: contrast(5000%)
+}
+
+button.view.buttons.close {
+    border: solid var(--accentRed);
+    border-width: 10px;
+}
+
+button.view.buttons.minimize {
+    border: solid var(--accentOrange);
+    border-width: 10px;
 }
 
 /* Desktop */

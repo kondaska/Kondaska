@@ -37,6 +37,7 @@ class View {
         this.width = properties.width;
         this.height = properties.height;
         this.data = properties.data;
+        this.container = document.createElement('div');
 
         if (typeof this.resizable !== "boolean") { this.resizable = defaults.viewResize; shell.warn(`Property "resizeable" was not defined or was not a boolean`, 'viewhandler') };
         if (typeof this.width !== "number") { this.width = defaults.viewWidth; shell.warn(`Property "width" was not defined or was not an interger`, 'viewhandler') };
@@ -48,7 +49,7 @@ class View {
         // Creating the viewwindow itself
 
         // Container window
-        const container = document.createElement('div');
+        const container = this.container
         container.classList = 'view container'
 
         // View header
@@ -75,6 +76,18 @@ class View {
 
         header.appendChild(headerText)
 
+            // Buttons
+        const buttons = document.createElement('p');
+        buttons.classList = 'view button-container';
+
+            // Close button
+        const close = document.createElement('button');
+        close.classList = 'view buttons close';
+        close.addEventListener('click', _ => { this.close () })
+        buttons.appendChild(close);
+
+        header.appendChild(buttons);
+
         container.appendChild(header)
 
         // View content
@@ -87,6 +100,18 @@ class View {
         container.appendChild(content);
 
         document.getElementsByTagName('main')[0].appendChild(container)
+    };
+
+    open() {
+        this.container.style.display = 'block';
+    }
+
+    minimize() {
+        this.container.style.display = 'none';
+    }
+
+    close() {
+        this.container.remove();
     }
 };
 

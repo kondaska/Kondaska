@@ -25,13 +25,17 @@
 
         // Temp stuff
         function demoView() {
-            new View('myWindowTitle', 'myApp', 'content',{
+            window.demo = new View('myWindowTitle', 'myApp', 'content',{
                 resizable: true,
                 width: 50,
                 height: 50,
-            }).create()
-        }
+            })
+        };
 
+        demoView()
+
+        demo.create()
+        demo.open()
     </script>
 </body>
 </html>
