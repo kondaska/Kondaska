@@ -1,8 +1,29 @@
 /* Generic */
 
 body {
-    background-color: var(--backgroundDark);
+    background-color: var(--accentDark);
     margin: 0;
+}
+
+/* Views */
+
+div.view {
+    color: white;
+    font-family: var(--code);
+    background-color: var(--backgroundDark);
+    resize: none;
+    overflow: hidden;
+    border: solid var(--backgroundDark);
+    border-width: 10px;
+    border-radius: 16px;
+}
+
+div.view.header {
+    background-color: var(--backgroundDark);
+    border: none;
+    border-radius: 0;
+    display: flex;
+    padding: 0;
 }
 
 /* Desktop */

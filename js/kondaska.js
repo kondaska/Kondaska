@@ -25,7 +25,7 @@ shell.error = function(msg) {
 class View {
     constructor(name, app, content, properties) {
 
-        if (typeof properties !== 'object') { throw new Error(`Properties is not an object`) };
+        if (typeof properties !== 'object') { throw new Error(`Properties is not an object or not defined`) };
 
         this.name = name;
         this.app = app;
@@ -36,8 +36,8 @@ class View {
         this.data = properties.data;
 
         if (typeof this.resizable !== "boolean") { this.resizable = defaults.viewResize; shell.warn(`Property "resizeable" was not defined or was not a boolean`, 'viewhandler') };
-        if (typeof this.width !== "interger") { this.width = defaults.viewWidth; shell.warn(`Property "width" was not defined or was not an interger`, 'viewhandler') };
-        if (typeof this.height !== "interger") { this.width = defaults.viewHeight; shell.warn(`Property "height" was not defined or was not an interger`, 'viewhandler') };;
+        if (typeof this.width !== "number") { this.width = defaults.viewWidth; shell.warn(`Property "width" was not defined or was not an interger`, 'viewhandler') };
+        if (typeof this.height !== "number") { this.width = defaults.viewHeight; shell.warn(`Property "height" was not defined or was not an interger`, 'viewhandler') };;
 
     };
 
@@ -51,6 +51,29 @@ class View {
         // View header
         const header = document.createElement('div');
         header.classList = 'view header';
-        
+
+        const headerText = document.createElement('p');
+        headerText.style.margin = 0;
+        headerText.width = '90%'
+
+            // Title
+        const name = document.createElement('span');
+        name.classList = 'view header';
+        name.innerText = this.name;
+        headerText.appendChild(name)
+
+        headerText.innerHTML += ' - ';
+
+            // App name
+        const app = document.createElement('span');
+        name.classList = 'view header';
+        app.innerText = this.app;
+        headerText.appendChild(app)
+
+        header.appendChild(headerText)
+
+        container.appendChild(header)
+
+        document.getElementsByTagName('main')[0].appendChild(container)
     }
 };
