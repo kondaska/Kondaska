@@ -1,7 +1,7 @@
 /* Generic */
 
 body {
-    background-color: var(--mainColor);
+    background-color: var(--backgroundDark);
     margin: 0;
 }
 
