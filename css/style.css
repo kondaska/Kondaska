@@ -12,6 +12,8 @@ div.view.container {
     width: fit-content;
     height: fit-content;
     display: none;
+    left: 10px;
+    right: 0px;
 }
 
 div.view {
@@ -32,6 +34,7 @@ div.view.header {
     display: flex;
     justify-content: space-between;
     padding: 0;
+    cursor: pointer;
 }
 
 div.view.content {

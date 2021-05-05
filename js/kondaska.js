@@ -37,7 +37,6 @@ class View {
         this.width = properties.width;
         this.height = properties.height;
         this.data = properties.data;
-        this.container = document.createElement('div');
 
         if (typeof this.resizable !== "boolean") { this.resizable = defaults.viewResize; shell.warn(`Property "resizeable" was not defined or was not a boolean`, 'viewhandler') };
         if (typeof this.width !== "number") { this.width = defaults.viewWidth; shell.warn(`Property "width" was not defined or was not an interger`, 'viewhandler') };
@@ -49,8 +48,9 @@ class View {
         // Creating the viewwindow itself
 
         // Container window
-        const container = this.container
-        container.classList = 'view container'
+        this.container = document.createElement('div');
+        const container = this.container;
+        container.classList = 'view container';
 
         // View header
         const header = document.createElement('div');
@@ -58,13 +58,13 @@ class View {
 
         const headerText = document.createElement('p');
         headerText.style.margin = 0;
-        headerText.width = '90%'
+        headerText.width = '90%';
 
             // Title
         const name = document.createElement('span');
         name.classList = 'view header';
         name.innerText = this.name;
-        headerText.appendChild(name)
+        headerText.appendChild(name);
 
         headerText.innerHTML += ' - ';
 
@@ -72,9 +72,9 @@ class View {
         const app = document.createElement('span');
         name.classList = 'view header';
         app.innerText = this.app;
-        headerText.appendChild(app)
+        headerText.appendChild(app);
 
-        header.appendChild(headerText)
+        header.appendChild(headerText);
 
             // Buttons
         const buttons = document.createElement('p');
@@ -88,37 +88,72 @@ class View {
 
         header.appendChild(buttons);
 
-        container.appendChild(header)
+        header.addEventListener('mousedown', evt => {
+            evt.preventDefault()
+            this.touch = true;
+        });
+
+        header.addEventListener('mouseup', _ => {
+            this.touch = false;
+        });
+
+        header.addEventListener('mouseleave', _ => {
+            if (!this.touch) { return };
+            this.touch = false;
+        });
+
+        header.addEventListener('mousemove', evt => {
+            if (!this.touch) { return };
+
+            evt.preventDefault()
+
+            const style = this.container.style;
+
+            // Horizontal movement
+            let left = style.left.slice(0, -2);
+            if (style.left === '') { left = 0 };
+            left = parseInt(left);
+            style.left = left + evt.movementX + 'px';
+
+            // Vertical movement
+            let top = style.top.slice(0, -2);
+            if (style.top === '') { top = 0 };
+            top = parseInt(top);
+            style.top = top + evt.movementY + 'px';
+        })
+
+        container.appendChild(header);
 
         // View content
         const content = document.createElement('div');
         content.classList = 'view content';
         content.style.width = this.width;
         content.style.height = this.height;
-        if (!this.resizable) { content.style.resize = 'none' }
+        if (!this.resizable) { content.style.resize = 'none' };
 
         container.appendChild(content);
 
-        document.getElementsByTagName('main')[0].appendChild(container)
+        document.getElementsByTagName('main')[0].appendChild(container);
     };
 
     open() {
         this.container.style.display = 'block';
-    }
+        this.container.style.position = 'absolute';
+    };
 
     minimize() {
         this.container.style.display = 'none';
-    }
+    };
 
     close() {
         this.container.remove();
-    }
+    };
 };
 
 /* Boot */
 
 const init = function() {
-    document.title += ` | ${system.version.state} ${system.version.version}`
-}
+    document.title += ` | ${system.version.state} ${system.version.version}`;
+};
 
-window.onload = init
+window.onload = init;
