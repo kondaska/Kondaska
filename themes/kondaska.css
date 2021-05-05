@@ -4,17 +4,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
 :root {
+
+    /* Fonts */
     --font: 'Roboto';
     --code: 'Roboto Mono';
     --serif: 'Roboto Slab';
     --condensed: 'Roboto Condensed';
 
-    --backgroundDark: #181A1B;
+    /* Colors */
     --accentDark: #003049;
     --accentRed: #D62828;
     --accentOrange: #F77F00;
     --accentYellow: #FCBF49;
     --accentWhite: #EAE2B7;
+
+    /* System Colors */
+    --background: #181A1B;
+    --window-border-color: var(--accentDark);
+    --taskbar-color: var(--accentDark)
 }
 
 body {

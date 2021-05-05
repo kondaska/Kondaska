@@ -1,6 +1,9 @@
 /* Generic */
 const system = [];
-
+system.version = {
+    'state': 'Alpha',
+    'version': '1.0.0'
+}
 system.views = [];
 
 /* Kondaska Shell */
@@ -42,7 +45,7 @@ class View {
     };
 
     create() {
-        // Creating the window itself
+        // Creating the viewwindow itself
 
         // Container window
         const container = document.createElement('div');
@@ -74,6 +77,23 @@ class View {
 
         container.appendChild(header)
 
+        // View content
+        const content = document.createElement('div');
+        content.classList = 'view content';
+        content.style.width = this.width;
+        content.style.height = this.height;
+        if (!this.resizable) { content.style.resize = 'none' }
+
+        container.appendChild(content);
+
         document.getElementsByTagName('main')[0].appendChild(container)
     }
 };
+
+/* Boot */
+
+const init = function() {
+    document.title += ` | ${system.version.state} ${system.version.version}`
+}
+
+window.onload = init

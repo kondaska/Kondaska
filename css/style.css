@@ -1,29 +1,45 @@
 /* Generic */
 
 body {
-    background-color: var(--accentDark);
+    background-color: var(--background);
     margin: 0;
+    overflow: hidden;
 }
 
 /* Views */
 
+div.view.container {
+    width: fit-content;
+    height: fit-content;
+}
+
 div.view {
     color: white;
     font-family: var(--code);
-    background-color: var(--backgroundDark);
+    background-color: var(--window-border-color);
     resize: none;
     overflow: hidden;
-    border: solid var(--backgroundDark);
+    border: solid var(--window-border-color);
     border-width: 10px;
     border-radius: 16px;
 }
 
 div.view.header {
-    background-color: var(--backgroundDark);
+    background-color: var(--window-border-color);
     border: none;
     border-radius: 0;
     display: flex;
     padding: 0;
+}
+
+div.view.content {
+    background-color: blue; /* For testing puroposes */
+    border: none;
+    resize: both;
+    min-width: 340px;
+    min-height: 150px;
+    width: 500px;
+    height: 500px;
 }
 
 /* Desktop */
