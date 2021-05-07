@@ -94,8 +94,6 @@ class View {
         header.addEventListener('mousedown', evt => {
             evt.preventDefault();
             this.touch = true;
-            this.container.style.zIndex = system.lastZIndex +1;
-            system.lastZIndex++;
         });
 
         document.addEventListener('mouseup', _ => {
@@ -135,6 +133,12 @@ class View {
         if (!this.resizable) { content.style.resize = 'none' };
 
         container.appendChild(content);
+
+        container.addEventListener('mousedown', evt => {
+            if (evt.target.tagName === 'BUTTON' && evt.target.className === 'view buttons close') { return }
+            this.container.style.zIndex = system.lastZIndex +1;
+            system.lastZIndex++;
+        })
 
         document.getElementsByTagName('main')[0].appendChild(container);
     };
