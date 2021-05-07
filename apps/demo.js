@@ -6,15 +6,15 @@ function demoButton() {
     })
 }
 
-const demoViewContent = document.createElement('div')
-const demoHello = document.createElement('h1')
-demoHello.innerText = 'Hello'
-const demoWorld = document.createElement('p')
-demoWorld.innerText = 'world'
-demoViewContent.appendChild(demoHello)
-demoViewContent.appendChild(demoWorld)
-
 function newViewDemo() {
+    const demoViewContent = document.createElement('div')
+    const demoHello = document.createElement('h1')
+    demoHello.innerText = 'Hello'
+    const demoWorld = document.createElement('p')
+    demoWorld.innerText = 'world'
+    demoViewContent.appendChild(demoHello)
+    demoViewContent.appendChild(demoWorld)
+    console.log(demoViewContent)
     thisdemo = new View('myWindowTitle', 'myApp', demoViewContent,{
         resizable: true,
         width: 500,
