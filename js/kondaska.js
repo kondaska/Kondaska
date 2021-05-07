@@ -23,26 +23,26 @@ system.formattedDate = mode => {
 
         default:
             return system.now().toLocaleString('en-GB', { timeZone: system.timeZone() });
-    }
-}
+    };
+};
 
 /* Kondaska Shell */
 const shell = [];
 
 // Shell log
 shell.log = function(msg) {
-    console.log(msg)
-}
+    console.log(msg);
+};
 
 // Shell warn
 shell.warn = function(msg) {
-    console.error(msg)
-}
+    console.error(msg);
+};
 
 // Shell error
 shell.error = function(msg) {
-    console.error(msg)
-}
+    console.error(msg);
+};
 
 /* Header */
 
@@ -57,15 +57,15 @@ system.header.time = mode => {
         case true:
             system.header.time.interval = setInterval(_ => {
                 system.header.display.time().innerText = system.formattedDate('time');
-            }, 100)
+            }, 100);
             break;
 
         case false:
-            clearInterval(system.header.time.interval)
+            clearInterval(system.header.time.interval);
             break;
 
         default:
-            system.header.time(true)
+            system.header.time(true);
             break;
     }
 }
@@ -89,7 +89,7 @@ class View {
         if (typeof this.width !== "number") { this.width = defaults.viewWidth; shell.warn(`Property "width" was not defined or was not an interger`, 'viewhandler') };
         if (typeof this.height !== "number") { this.width = defaults.viewHeight; shell.warn(`Property "height" was not defined or was not an interger`, 'viewhandler') };;
 
-        system.views.push(this)
+        system.views.push(this);
     };
 
     create() {
@@ -131,7 +131,7 @@ class View {
             // Close button
         const close = document.createElement('button');
         close.classList = 'view buttons close';
-        close.addEventListener('click', _ => { this.close() })
+        close.addEventListener('click', _ => { this.close() });
         buttons.appendChild(close);
 
         header.appendChild(buttons);
