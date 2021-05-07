@@ -6,6 +6,23 @@ system.version = {
 };
 system.views = [];
 system.lastZIndex = 0;
+system.now = _ => { return new Date() };
+
+system.formattedDate = mode => {
+    switch (mode) {
+        case 'time':
+            return system.now().toLocaleString('en-GB', { timeZone: 'UTC' }).split(' ')[1];
+        
+        case 'date':
+            return system.now().toLocaleString('en-GB', { timeZone: 'UTC' }).split(' ')[0].slice(0,-1);
+
+        case 'full':
+            return system.now().toLocaleString('en-GB', { timeZone: 'UTC' });
+
+        default:
+            return system.now().toLocaleString('en-GB', { timeZone: 'UTC' });
+    }
+}
 
 /* Kondaska Shell */
 const shell = [];
@@ -23,6 +40,32 @@ shell.warn = function(msg) {
 // Shell error
 shell.error = function(msg) {
     console.error(msg)
+}
+
+/* Header */
+
+system.header = [];
+system.header.display = [];
+
+system.header.display.views = _ => { return document.getElementById('view-count') };
+system.header.display.time = _ => { return document.getElementById('time') };
+
+system.header.time = mode => {
+    switch (mode) {
+        case true:
+            system.header.time.interval = setInterval(_ => {
+                system.header.display.time().innerText = system.formattedDate('time');
+            }, 100)
+            break;
+
+        case false:
+            clearInterval(system.header.time.interval)
+            break;
+
+        default:
+            system.header.time(true)
+            break;
+    }
 }
 
 /* Views (window) */
@@ -86,7 +129,7 @@ class View {
             // Close button
         const close = document.createElement('button');
         close.classList = 'view buttons close';
-        close.addEventListener('click', _ => { this.close () })
+        close.addEventListener('click', _ => { this.close() })
         buttons.appendChild(close);
 
         header.appendChild(buttons);
@@ -141,11 +184,12 @@ class View {
         })
 
         document.getElementsByTagName('main')[0].appendChild(container);
+
+        system.header.display.views().innerText = system.views.length;
     };
 
     open() {
         this.container.style.display = 'block';
-        this.container.style.position = 'absolute';
     };
 
     minimize() {
@@ -156,7 +200,8 @@ class View {
         this.container.remove();
         const index = system.views.findIndex( ({ id }) => id === this.id );
         system.views.splice(index, 1);
-        if (system.views.length === 0) { system.lastZIndex = 0 }
+        system.header.display.views().innerText = system.views.length;
+        if (system.views.length === 0) { system.lastZIndex = 0 };
     };
 };
 
@@ -178,6 +223,7 @@ const TaskButton = class {
 
 const init = function() {
     document.title += ` | ${system.version.state} ${system.version.version}`;
+    system.header.time(true)
 };
 
 window.onload = init;
