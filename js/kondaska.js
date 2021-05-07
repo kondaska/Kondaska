@@ -82,13 +82,17 @@ class View {
         this.resizable = properties.resizable;
         this.width = properties.width;
         this.height = properties.height;
+        this.positionX = properties.positionX;
+        this.positionY = properties.positionY;
         this.data = properties.data;
         this.id = Date.now()
 
         if (typeof this.resizable !== "boolean") { this.resizable = defaults.viewResize; shell.warn(`Property "resizeable" was not defined or was not a boolean`, 'viewhandler') };
         if (typeof this.width !== "number") { this.width = defaults.viewWidth; shell.warn(`Property "width" was not defined or was not an interger`, 'viewhandler') };
-        if (typeof this.height !== "number") { this.width = defaults.viewHeight; shell.warn(`Property "height" was not defined or was not an interger`, 'viewhandler') };;
-
+        if (typeof this.height !== "number") { this.height = defaults.viewHeight; shell.warn(`Property "height" was not defined or was not an interger`, 'viewhandler') };
+        if (typeof this.positionX !== "number") { this.positionX = defaults.viewX; shell.warn(`Property "positionX" was not defined or was not an interger`, 'viewhandler') };
+        if (typeof this.positionY !== "number") { this.positionY = defaults.viewY; shell.warn(`Property "positionX" was not defined or was not an interger`, 'viewhandler') };
+        
         system.views.push(this);
     };
 
@@ -99,6 +103,8 @@ class View {
         this.container = document.createElement('div');
         const container = this.container;
         container.classList = 'view container';
+        container.style.left = `${this.positionX}px`;
+        container.style.top = `${this.positionY}px`;
 
         // View header
         const header = document.createElement('div');

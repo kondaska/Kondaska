@@ -14,11 +14,12 @@ function newViewDemo() {
     demoWorld.innerText = 'world'
     demoViewContent.appendChild(demoHello)
     demoViewContent.appendChild(demoWorld)
-    console.log(demoViewContent)
     thisdemo = new View('myWindowTitle', 'myApp', demoViewContent,{
         resizable: true,
         width: 500,
         height: 500,
+        positionX: 100,
+        positionY: 100
     })
     thisdemo.create()
     thisdemo.open()

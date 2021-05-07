@@ -13,8 +13,6 @@ div.view.container {
     height: fit-content;
     display: none;
     position: absolute;
-    left: 100px;
-    top: 100px;
     filter: drop-shadow(0 0 10px #121212);
 }
 
