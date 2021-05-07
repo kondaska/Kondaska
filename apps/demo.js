@@ -17,8 +17,8 @@ demoViewContent.appendChild(demoWorld)
 function newViewDemo() {
     thisdemo = new View('myWindowTitle', 'myApp', demoViewContent,{
         resizable: true,
-        width: 50,
-        height: 50,
+        width: 500,
+        height: 500,
     })
     thisdemo.create()
     thisdemo.open()

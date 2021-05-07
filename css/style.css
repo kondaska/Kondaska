@@ -49,8 +49,6 @@ div.view.content {
     resize: both;
     min-width: 340px;
     min-height: 150px;
-    width: 500px;
-    height: 500px;
 }
 
 p.view.button-container {
@@ -100,22 +98,37 @@ main {
     position: absolute;
 }
 
+/* Header */
+
+header {
+    position: absolute;
+    z-index: 10000000;
+    top: 0;
+    width: 100%;
+    height: 24px;
+    background-color: var(--header-color);
+    backdrop-filter: blur(10px);
+    filter: drop-shadow(0 0 10px #121212);
+
+    display: flex;
+}
+
 /* Taskbar */
 
 footer {
     background-color: var(--taskbar-color);
     position: absolute;
-    z-index: 100000;
-    height: 8vh;
-    width: 90vw;
+    z-index: 10000000;
+    height: 8%;
+    width: 90%;
     bottom: 16px;
-    margin-left: 5vw;
+    margin-left: 5%;
     border: hidden;
     border-radius: 16px;
     display: flex;
     backdrop-filter: blur(10px);
     filter: drop-shadow(0 0 10px #121212);
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 8px;
 }
 
