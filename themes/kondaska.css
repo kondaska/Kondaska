@@ -20,11 +20,8 @@
 
     /* System Colors */
     --background: #181A1B;
+    --text-color: #ffffff;
     --window-border-color: var(--accentDark);
     --taskbar-color: #003049cc;
     --header-color: #003049cc;
-}
-
-body {
-    margin: 0;
 }

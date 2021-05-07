@@ -109,8 +109,20 @@ header {
     background-color: var(--header-color);
     backdrop-filter: blur(10px);
     filter: drop-shadow(0 0 10px #121212);
+}
 
+div#info {
     display: flex;
+    justify-content: space-between;
+
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+div#info > p {
+    font-family: var(--code);
+    color: var(--text-color);
+    margin: 0;
 }
 
 /* Taskbar */
