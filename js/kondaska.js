@@ -129,8 +129,8 @@ class View {
         // View content
         const content = document.createElement('div');
         content.classList = 'view content';
-        content.style.width = this.width;
-        content.style.height = this.height;
+        content.style.width = `${this.width}px`;
+        content.style.height = `${this.height}px`;
         content.appendChild(this.content);
         if (!this.resizable) { content.style.resize = 'none' };
 
