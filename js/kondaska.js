@@ -113,12 +113,14 @@ class View {
             let left = style.left.slice(0, -2);
             if (style.left === '') { left = 0 };
             left = parseInt(left);
+            if (left <= 0 && evt.movementX < 0) { return };
             style.left = left + evt.movementX + 'px';
 
             // Vertical movement
             let top = style.top.slice(0, -2);
             if (style.top === '') { top = 0 };
             top = parseInt(top);
+            if (top <= window.innerHeight/100 && evt.movementY < 0 || evt.clientY <= window.innerHeight/100) { return };
             style.top = top + evt.movementY + 'px';
         })
 
