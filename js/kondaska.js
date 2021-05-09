@@ -6,25 +6,6 @@ system.version = {
 };
 system.views = [];
 system.lastZIndex = 0;
-system.now = _ => { return new Date() };
-
-system.timeZone = _ => { return Intl.DateTimeFormat().resolvedOptions().timeZone };
-
-system.formattedDate = mode => {
-    switch (mode) {
-        case 'time':
-            return system.now().toLocaleString('en-GB', { timeZone: system.timeZone() }).split(' ')[1];
-        
-        case 'date':
-            return system.now().toLocaleString('en-GB', { timeZone: system.timeZone() }).split(' ')[0].slice(0,-1);
-
-        case 'full':
-            return system.now().toLocaleString('en-GB', { timeZone: system.timeZone() });
-
-        default:
-            return system.now().toLocaleString('en-GB', { timeZone: system.timeZone() });
-    };
-};
 
 /* Kondaska Shell */
 const shell = [];
@@ -56,7 +37,7 @@ system.header.time = mode => {
     switch (mode) {
         case true:
             system.header.time.interval = setInterval(_ => {
-                system.header.display.time().innerText = system.formattedDate('time');
+                system.header.display.time().innerText = api.formattedDate('time');
             }, 100);
             break;
 
