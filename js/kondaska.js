@@ -67,6 +67,7 @@ class View {
         this.positionY = properties.positionY;
         this.data = properties.data;
         this.id = Date.now()
+        this.maximized = false
 
         if (typeof this.resizable !== "boolean") { this.resizable = defaults.viewResize; shell.warn(`Property "resizeable" was not defined or was not a boolean`, 'viewhandler') };
         if (typeof this.width !== "number") { this.width = defaults.viewWidth; shell.warn(`Property "width" was not defined or was not an interger`, 'viewhandler') };
@@ -121,6 +122,12 @@ class View {
         close.addEventListener('click', _ => { this.close() });
         buttons.appendChild(close);
 
+            // Close button
+        const maximize = document.createElement('button');
+        maximize.classList = 'view buttons maximize';
+        maximize.addEventListener('click', _ => { this.maximize() });
+        buttons.appendChild(maximize);
+
         header.appendChild(buttons);
 
         let pos = {};
@@ -143,21 +150,25 @@ class View {
 
             const style = this.container.style;
 
-            console.log(evt)
-
             // Horizontal movement
             let left = style.left.slice(0, -2);
             if (style.left === '') { left = 0 };
             left = parseInt(left);
-            if (left <= 0 && evt.movementX < 0) { return };
-            style.left = left + (evt.clientX - pos.x) + 'px';
+            if (!(left <= 0 && evt.movementX < 0)) {
+                style.left = left + (evt.clientX - pos.x) + 'px';
+            };
 
             // Vertical movement
             let top = style.top.slice(0, -2);
             if (style.top === '') { top = 0 };
             top = parseInt(top);
-            if (top <= window.innerHeight/100 && evt.movementY < 0 || evt.clientY <= window.innerHeight/100) { return };
-            style.top = top + (evt.clientY - pos.y) + 'px';
+            if (!(top <= window.innerHeight/100 && evt.movementY < 0 || evt.clientY <= window.innerHeight/100)) {
+                style.top = top + (evt.clientY - pos.y) + 'px';
+            };
+            
+
+            console.log((evt.clientX - pos.x))
+            console.log((evt.clientY - pos.y))
 
             // Resetting position
             pos.x = evt.clientX;
@@ -177,8 +188,9 @@ class View {
         container.appendChild(content);
 
         container.addEventListener('mousedown', evt => {
+            if (this.maximized) { console.log('ca'); return }
             if (evt.target.tagName === 'BUTTON' && evt.target.className === 'view buttons close') { return }
-            this.container.style.zIndex = system.lastZIndex +1;
+            this.container.style.zIndex = system.lastZIndex + 1;
             system.lastZIndex++;
         })
 
@@ -190,6 +202,21 @@ class View {
     open() {
         this.container.style.display = 'block';
     };
+
+    maximize() {
+        switch (this.maximized) {
+            case false: // Now maximizing
+                this.container.style.left = `0`;
+                this.container.style.top = `0`;
+                this.container.style.zIndex = 10000001
+                break;
+
+            case true:
+                break;
+        }
+
+        this.maximized = !this.maximized;
+    }
 
     minimize() {
         this.container.style.display = 'none';

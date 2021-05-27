@@ -69,6 +69,8 @@ button.view.buttons {
     justify-self: right;
     align-self: top;
     cursor: pointer;
+    border-width: 10px;
+    border: solid gray;
 }
 
 button.view.buttons:focus {
@@ -81,6 +83,11 @@ button.view.buttons:hover {
 
 button.view.buttons.close {
     border: solid var(--accentRed);
+    border-width: 10px;
+}
+
+button.view.buttons.maximize {
+    border: solid green;
     border-width: 10px;
 }
 
