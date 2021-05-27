@@ -123,8 +123,12 @@ class View {
 
         header.appendChild(buttons);
 
+        let pos = {};
+
         header.addEventListener('mousedown', evt => {
             evt.preventDefault();
+            pos.x = evt.clientX;
+            pos.y = evt.clientY;
             this.touch = true;
         });
 
@@ -139,19 +143,25 @@ class View {
 
             const style = this.container.style;
 
+            console.log(evt)
+
             // Horizontal movement
             let left = style.left.slice(0, -2);
             if (style.left === '') { left = 0 };
             left = parseInt(left);
             if (left <= 0 && evt.movementX < 0) { return };
-            style.left = left + evt.movementX + 'px';
+            style.left = left + (evt.clientX - pos.x) + 'px';
 
             // Vertical movement
             let top = style.top.slice(0, -2);
             if (style.top === '') { top = 0 };
             top = parseInt(top);
             if (top <= window.innerHeight/100 && evt.movementY < 0 || evt.clientY <= window.innerHeight/100) { return };
-            style.top = top + evt.movementY + 'px';
+            style.top = top + (evt.clientY - pos.y) + 'px';
+
+            // Resetting position
+            pos.x = evt.clientX;
+            pos.y = evt.clientY;
         })
 
         container.appendChild(header);
