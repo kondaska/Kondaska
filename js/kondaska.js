@@ -76,6 +76,8 @@ class View {
         if (typeof this.positionY !== "number") { this.positionY = defaults.viewY; shell.warn(`Property "positionX" was not defined or was not an interger`, 'viewhandler') };
         
         system.views.push(this);
+
+        this.memory = {};
     };
 
     create() {
@@ -165,10 +167,6 @@ class View {
             if (!(top <= window.innerHeight/100 && evt.movementY < 0 || evt.clientY <= window.innerHeight/100)) {
                 style.top = top + (evt.clientY - pos.y) + 'px';
             };
-            
-
-            console.log((evt.clientX - pos.x))
-            console.log((evt.clientY - pos.y))
 
             // Resetting position
             pos.x = evt.clientX;
@@ -178,18 +176,18 @@ class View {
         container.appendChild(header);
 
         // View content
-        const content = document.createElement('div');
-        content.classList = 'view content';
-        content.style.width = `${this.width}px`;
-        content.style.height = `${this.height}px`;
-        content.appendChild(this.content);
-        if (!this.resizable) { content.style.resize = 'none' };
+        this.contentContainer = document.createElement('div');
+        this.contentContainer.classList = 'view content';
+        this.contentContainer.style.width = `${this.width}px`;
+        this.contentContainer.style.height = `${this.height}px`;
+        this.contentContainer.appendChild(this.content);
+        if (!this.resizable) { this.contentContainer.style.resize = 'none' };
 
-        container.appendChild(content);
+        container.appendChild(this.contentContainer);
 
         container.addEventListener('mousedown', evt => {
-            if (this.maximized) { console.log('ca'); return }
-            if (evt.target.tagName === 'BUTTON' && evt.target.className === 'view buttons close') { return }
+            if (this.maximized) { return };
+            if (evt.target.tagName === 'BUTTON' && evt.target.className === 'view buttons close') { return };
             this.container.style.zIndex = system.lastZIndex + 1;
             system.lastZIndex++;
         })
@@ -205,13 +203,30 @@ class View {
 
     maximize() {
         switch (this.maximized) {
+            
             case false: // Now maximizing
+
+                this.memory.width = this.contentContainer.style.width;
+                this.memory.height = this.contentContainer.style.height;
+                this.memory.left = this.container.style.left;
+                this.memory.top = this.container.style.top;
+                this.memory.resize = this.contentContainer.style.resize;
+
                 this.container.style.left = `0`;
                 this.container.style.top = `0`;
-                this.container.style.zIndex = 10000001
+                this.container.style.zIndex = 10000001;
+                this.contentContainer.style.resize = 'none';
+
+                this.contentContainer.style.width = `${window.innerWidth - 20}px`;
+                this.contentContainer.style.height = `${window.innerHeight - 50}px`;
                 break;
 
             case true:
+                this.contentContainer.style.width = this.memory.width;
+                this.contentContainer.style.height = this.memory.height;
+                this.container.style.left = this.memory.left;
+                this.container.style.top = this.memory.top;
+                this.contentContainer.style.resize = this.memory.resize;
                 break;
         }
 
