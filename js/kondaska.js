@@ -205,7 +205,6 @@ class View {
         switch (this.maximized) {
             
             case false: // Now maximizing
-
                 this.memory.width = this.contentContainer.style.width;
                 this.memory.height = this.contentContainer.style.height;
                 this.memory.left = this.container.style.left;
@@ -246,6 +245,7 @@ class View {
     };
 };
 
+
 /* Taskbar */
 
 // Taskbar button
@@ -264,7 +264,7 @@ const TaskButton = class {
 
 const init = function() {
     document.title += ` | ${system.version.state} ${system.version.version}`;
-    system.header.time(true)
+    system.header.time(true);
 };
 
 window.onload = init;

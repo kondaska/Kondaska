@@ -28,4 +28,4 @@ api.formattedDate = mode => {
 };
 
 // Returns true or false for dark mode from system
-api.darkMode = _ => { return window.matchMedia('(prefers-color-scheme: dark)').matches }
+api.darkMode = _ => { return window.matchMedia('(prefers-color-scheme: dark)').matches };
