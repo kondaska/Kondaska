@@ -222,23 +222,33 @@ class View {
                 this.memory.resize = this.contentContainer.style.resize;
 
                 // Set to maximized settings
-                this.container.style.left = `0`;
-                this.container.style.top = `0`;
-                this.container.style.zIndex = 10000001;
-                this.contentContainer.style.resize = 'none';
-                this.contentContainer.style.width = `${window.innerWidth - 20}px`;
-                this.contentContainer.style.height = `${window.innerHeight - 50}px`;
+                this.container.style.left = `0`; // Move to the most left
+                this.container.style.top = `0`; // Move to most top
+                this.container.style.zIndex = 10000001; // Set in front of everything else
+                this.container.style.borderRadius = '0'; // Remove rounded corners of outside
+                this.container.style.borderWidth = '0'; // Remove outside border
+
+                this.contentContainer.style.resize = 'none'; // Remove ability to resize
+                this.contentContainer.style.width = `${window.innerWidth}px`; // Make it as wide as screen
+                this.contentContainer.style.height = `${window.innerHeight - 30}px`; // Make it as tall as screen
+                this.contentContainer.style.borderRadius = '0'; // Remove the rounded corners of content
 
                 break;
 
             case true:
 
                 // Return to settings before maximizing
-                this.contentContainer.style.width = this.memory.width;
-                this.contentContainer.style.height = this.memory.height;
-                this.container.style.left = this.memory.left;
-                this.container.style.top = this.memory.top;
-                this.contentContainer.style.resize = this.memory.resize;
+                
+                this.container.style.left = this.memory.left; // Set the X position back to previous
+                this.container.style.top = this.memory.top; // Set the Y position back to previous
+                this.container.style.borderRadius = '16px'; // Add the rounded corners back
+                this.container.style.borderWidth = '10px'
+
+                this.contentContainer.style.resize = this.memory.resize; // Set the resize option back to previous
+                this.contentContainer.style.width = this.memory.width; // Set width back to previous
+                this.contentContainer.style.height = this.memory.height; // Set height back to previous
+                this.contentContainer.style.borderRadius = '16px'
+
                 break;
 
         };
