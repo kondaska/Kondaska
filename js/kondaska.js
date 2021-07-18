@@ -150,9 +150,13 @@ class View {
         });
 
         document.addEventListener('mousemove', evt => {
+            // Don't move when the mouse isn't down
             if (!this.touch) { return };
 
-            evt.preventDefault()
+            // Don't move when view is maximized
+            if (this.maximized) { return };
+
+            evt.preventDefault();
 
             const style = this.container.style;
 
