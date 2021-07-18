@@ -233,6 +233,14 @@ class View {
                 this.contentContainer.style.height = `${window.innerHeight - 30}px`; // Make it as tall as screen
                 this.contentContainer.style.borderRadius = '0'; // Remove the rounded corners of content
 
+                // Resize when screen resizes
+                window.addEventListener('resize', _ => {
+
+                    this.contentContainer.style.width = `${window.innerWidth}px`; // Make it as wide as screen
+                    this.contentContainer.style.height = `${window.innerHeight - 30}px`; // Make it as tall as screen
+
+                })
+
                 break;
 
             case true:
