@@ -7,6 +7,7 @@ system.version = {
 system.views = [];
 system.lastZIndex = 0;
 
+
 /* Kondaska Shell */
 const shell = [];
 
@@ -25,8 +26,8 @@ shell.error = function(msg) {
     console.error(msg);
 };
 
-/* Header */
 
+/* Header */
 system.header = [];
 system.header.display = [];
 
@@ -48,8 +49,9 @@ system.header.time = mode => {
         default:
             system.header.time(true);
             break;
-    }
-}
+    };
+};
+
 
 /* Views (window) */
 class View {
@@ -78,9 +80,11 @@ class View {
         system.views.push(this);
 
         this.memory = {};
+
     };
 
     create() {
+
         // Creating the viewwindow itself
 
         // Container window
@@ -195,60 +199,65 @@ class View {
         document.getElementsByTagName('main')[0].appendChild(container);
 
         system.header.display.views().innerText = system.views.length;
+
     };
 
-    open() {
-        this.container.style.display = 'block';
-    };
+    open() { this.container.style.display = 'block'; };
 
     maximize() {
+
         switch (this.maximized) {
             
             case false: // Now maximizing
+
+                // Remember the current settings
                 this.memory.width = this.contentContainer.style.width;
                 this.memory.height = this.contentContainer.style.height;
                 this.memory.left = this.container.style.left;
                 this.memory.top = this.container.style.top;
                 this.memory.resize = this.contentContainer.style.resize;
 
+                // Set to maximized settings
                 this.container.style.left = `0`;
                 this.container.style.top = `0`;
                 this.container.style.zIndex = 10000001;
                 this.contentContainer.style.resize = 'none';
-
                 this.contentContainer.style.width = `${window.innerWidth - 20}px`;
                 this.contentContainer.style.height = `${window.innerHeight - 50}px`;
+
                 break;
 
             case true:
+
+                // Return to settings before maximizing
                 this.contentContainer.style.width = this.memory.width;
                 this.contentContainer.style.height = this.memory.height;
                 this.container.style.left = this.memory.left;
                 this.container.style.top = this.memory.top;
                 this.contentContainer.style.resize = this.memory.resize;
                 break;
-        }
+
+        };
 
         this.maximized = !this.maximized;
-    }
 
-    minimize() {
-        this.container.style.display = 'none';
     };
 
+    minimize() { this.container.style.display = 'none'; };
+
     close() {
+
         this.container.remove();
         const index = system.views.findIndex( ({ id }) => id === this.id );
         system.views.splice(index, 1);
         system.header.display.views().innerText = system.views.length;
         if (system.views.length === 0) { system.lastZIndex = 0 };
+
     };
 };
 
 
 /* Taskbar */
-
-// Taskbar button
 const TaskButton = class {
     constructor() {};
 
