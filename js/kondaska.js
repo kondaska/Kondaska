@@ -276,8 +276,8 @@ class View {
         if (system.views.length === 0) { system.lastZIndex = 0 };
 
     };
-};
 
+};
 
 /* Taskbar */
 const TaskButton = class {
@@ -290,6 +290,21 @@ const TaskButton = class {
         return btn;
     };
 };
+
+
+/* Apps */
+class App {
+
+    constructor(name, icon, files, ) {
+
+        this.name = name;
+        this.icon = icon;
+        this.files
+
+    }
+
+}
+
 
 /* Boot / Initiation */
 
