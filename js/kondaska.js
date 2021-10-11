@@ -6,9 +6,63 @@ system.version = {
 };
 system.views = [];
 system.lastZIndex = 0;
+system.user = 'User';
+
+/* Boot screen */
+system.boot = function() {
+
+    window.onload = _ => {
+
+        // Clear body
+        document.body.innerHTML = '';
+
+        // Build modal
+        const container = document.createElement('div');
+
+        const modal = document.createElement('div');
+        modal.id = 'modal';
+        container.appendChild(modal);
+
+        const title = document.createElement('h1');
+        title.innerText = 'Enter your name';
+
+
+        const input = document.createElement('input');
+        input.id = 'name';
+
+        const button = document.createElement('button');
+        button.innerText = 'Confirm';
+        button.addEventListener('click', _ => {
+            system.user = input.value;
+            document.getElementById('login-css').remove();
+            document.getElementById('modal').remove();
+            system.build();
+            document.title += ` | ${system.version.state} ${system.version.version}`;
+            system.header.time(true);
+        })
+
+        input.addEventListener('keydown', evt => {
+            if (evt.key === 'Enter') {
+                button.click();
+            }
+        })
+
+        modal.appendChild(title);
+        modal.appendChild(input);
+        modal.appendChild(button);
+
+        // Append to body
+        document.body.appendChild(container);
+
+    };
+
+}
 
 /* Build page */
 system.build = function() {
+
+    // Clear body
+    document.body.innerHTML = '';
 
     // Build header
     const header = document.createElement('header');
@@ -29,6 +83,7 @@ system.build = function() {
 
     const headerUser = document.createElement('p');
     headerUser.id = 'header-user';
+    headerUser.innerText = system.user;
     headerInfo.appendChild(headerUser);
 
     // Desktop
@@ -72,10 +127,4 @@ system.header.time = mode => {
 
 /* Boot / Initiation */
 
-const init = function() {
-    system.build();
-    document.title += ` | ${system.version.state} ${system.version.version}`;
-    system.header.time(true);
-};
-
-window.onload = init;
+system.boot();
