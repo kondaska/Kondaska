@@ -1,6 +1,6 @@
 // Temp demo button
 function demoButton() {
-    const btn = new TaskButton().create();
+    const btn = new TaskButton('').create();
     btn.addEventListener('click', _ => {
         newViewDemo()
     })
