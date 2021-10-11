@@ -117,7 +117,7 @@ header {
     filter: drop-shadow(0 0 10px #121212);
 }
 
-div#info {
+div#header-info {
     display: flex;
     justify-content: space-between;
 
@@ -125,7 +125,7 @@ div#info {
     padding-right: 16px;
 }
 
-div#info > p {
+div#header-info > p {
     font-family: var(--code);
     color: var(--text-color);
     margin: 0;

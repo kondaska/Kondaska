@@ -7,12 +7,50 @@ system.version = {
 system.views = [];
 system.lastZIndex = 0;
 
+/* Build page */
+system.build = function() {
+
+    // Build header
+    const header = document.createElement('header');
+    header.id = 'header';
+
+    const headerInfo = document.createElement('div');
+    headerInfo.id = 'header-info';
+    header.appendChild(headerInfo);
+
+    const headerHome = document.createElement('p');
+    headerHome.id = 'header-home';
+    headerHome.innerText = 'Home';
+    headerInfo.appendChild(headerHome);
+
+    const headerTime = document.createElement('p');
+    headerTime.id = 'header-time';
+    headerInfo.appendChild(headerTime);
+
+    const headerUser = document.createElement('p');
+    headerUser.id = 'header-user';
+    headerInfo.appendChild(headerUser);
+
+    // Desktop
+    const desktop = document.createElement('main');
+    desktop.id = 'desktop';
+
+    // Taskbar
+    const taskbar = document.createElement('footer');
+
+    // Append to body
+    document.body.appendChild(header);
+    document.body.appendChild(desktop);
+    document.body.appendChild(taskbar);
+
+};
+
 /* Header */
 system.header = [];
 system.header.display = [];
 
-system.header.display.views = _ => { return document.getElementById('view-count') };
-system.header.display.time = _ => { return document.getElementById('time') };
+system.header.display.views = _ => { return document.getElementById('header-view-count') };
+system.header.display.time = _ => { return document.getElementById('header-time') };
 
 system.header.time = mode => {
     switch (mode) {
@@ -35,6 +73,7 @@ system.header.time = mode => {
 /* Boot / Initiation */
 
 const init = function() {
+    system.build();
     document.title += ` | ${system.version.state} ${system.version.version}`;
     system.header.time(true);
 };
