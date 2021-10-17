@@ -54,6 +54,9 @@ system.boot = function() {
         // Append to body
         document.body.appendChild(container);
 
+        // Focus on input
+        input.focus();
+
     };
 
 }
