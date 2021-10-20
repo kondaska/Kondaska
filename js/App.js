@@ -24,7 +24,7 @@ class App {
         shell.error(`Tried to start ${this.properties.name}, but no start function defined!`);
     };
 
-    load() {
+    install() {
         const js = this.sources.js;
         const css = this.sources.css;
 
@@ -43,5 +43,22 @@ class App {
             document.head.appendChild(el);
         });
     };
+
+    remove() {
+        const js = this.sources.js;
+        const css = this.sources.css;
+
+        // Remove JS
+        js.forEach(file => {
+            const el = document.querySelector(`script[src="${file}"]`);
+            el.parentNode.removeChild(el);
+        });
+
+        // Remove CSS
+        css.forEach(file => {
+            const el = document.querySelector(`link[href="${file}"]`);
+            el.parentNode.removeChild(el);
+        });
+    }
 
 };
