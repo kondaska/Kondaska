@@ -9,7 +9,9 @@ system.lastZIndex = 0;
 system.user = 'User';
 
 /* Boot screen */
-system.boot = function() {
+system.boot = skipLogin => {
+
+    if (skipLogin === 'true') { skipLogin = true; } else { skipLogin = false; };
 
     window.onload = _ => {
 
@@ -33,13 +35,15 @@ system.boot = function() {
         const button = document.createElement('button');
         button.innerText = 'Confirm';
         button.addEventListener('click', _ => {
-            system.user = input.value;
+            system.user = input.value || system.user;
             document.getElementById('login-css').remove();
-            document.getElementById('modal').remove();
+            modal.remove();
             system.build();
             document.title += ` | ${system.version.state} ${system.version.version}`;
             system.header.time(true);
         })
+
+        if (skipLogin) { button.click() };
 
         input.addEventListener('keydown', evt => {
             if (evt.key === 'Enter') {
@@ -130,4 +134,4 @@ system.header.time = mode => {
 
 /* Boot / Initiation */
 
-system.boot();
+system.boot((new URL(document.location)).searchParams.get('skipLogin'));
