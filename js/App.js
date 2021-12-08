@@ -61,6 +61,7 @@ class App {
         const css = this.sources.css;
 
         // Remove JS
+        // TODO: SHOULD USE ES6 IMPORTS
         js.forEach(file => {
             const el = document.querySelector(`script[src="${file}"]`);
             el.remove();
