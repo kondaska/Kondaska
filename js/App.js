@@ -1,6 +1,8 @@
 /* Apps */
 class App {
 
+    ID = api.getUniqueID();
+
     properties = {
         name: 'MyApp',
         version: '1.0.0',
@@ -8,15 +10,18 @@ class App {
     };
 
     sources = {
-        js: [],
-        css: [],
-        icon: '',
+        js: [], // JS files
+        css: [], // CSS files
+        dependencies: [], // Install scripts for dependencies
+        icon: '', // Icon file
     };
 
     constructor(properties, sources) {
 
         if (properties !== undefined) { this.properties = {...this.properties, ...properties} };
         if (sources !== undefined) { this.sources = {...this.sources, ...sources} };
+
+        shell.log(`App ${this.properties.name} v${this.properties.version} has been created!`);
 
     };
 
@@ -32,6 +37,8 @@ class App {
         js.forEach(file => {
             const el = document.createElement('script');
             el.src = file;
+            el.async = false;
+            el.defer = false;
             document.head.appendChild(el);
         });
 
@@ -42,6 +49,11 @@ class App {
             el.href = file;
             document.head.appendChild(el);
         });
+
+        // Add to installed apps
+        system.apps.push(this);
+
+        shell.log(`App ${this.properties.name} v${this.properties.version} has been installed!`);
     };
 
     remove() {
@@ -51,14 +63,29 @@ class App {
         // Remove JS
         js.forEach(file => {
             const el = document.querySelector(`script[src="${file}"]`);
-            el.parentNode.removeChild(el);
+            el.remove();
         });
 
         // Remove CSS
         css.forEach(file => {
             const el = document.querySelector(`link[href="${file}"]`);
-            el.parentNode.removeChild(el);
+            el.remove();
         });
+
+        // Remove from installed apps
+        system.apps = system.apps.find( ({ ID }) => ID === this.ID );
     }
 
+};
+
+/* Apps */
+const app = [];
+
+// App installer
+app.install = loadScript => {
+    const script = document.createElement('script');
+    script.src = loadScript;
+    document.head.appendChild(script);
+
+    script.remove();
 };
