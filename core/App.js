@@ -43,6 +43,7 @@ export class App {
         js.forEach(file => {
             const el = document.createElement('script');
             el.src = file;
+            el.type = 'module';
             el.async = false;
             el.defer = false;
             document.head.appendChild(el);

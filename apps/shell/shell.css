@@ -1,0 +1,21 @@
+.shell-content {
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+}
+
+.shell-line {
+    margin: 0;
+}
+
+.shell-type[data-type="log"] {
+    color: white;
+}
+
+.shell-type[data-type="warn"] {
+    color: yellow;
+}
+
+.shell-type[data-type="error"] {
+    color: red;
+}

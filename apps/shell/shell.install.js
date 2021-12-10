@@ -13,6 +13,9 @@ function install() {
         js: [
             'apps/shell/shell.app.js',
         ],
+        css: [
+            'apps/shell/shell.css',
+        ],
     };
 
     const app = new App(properties, sources);

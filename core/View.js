@@ -1,11 +1,11 @@
 /* Views (window) */
 export class View {
-    constructor(name, app, content, properties) {
+    constructor(name, appName, content, properties) {
 
         if (typeof properties !== 'object') { throw new Error(`Properties is not an object or not defined`) };
 
         this.name = name;
-        this.app = app;
+        this.appName = appName;
         this.content = content;
         this.resizable = properties.resizable;
         this.width = properties.width;
@@ -58,7 +58,7 @@ export class View {
             // App name
         const app = document.createElement('span');
         name.classList = 'view header';
-        app.innerText = this.app;
+        app.innerText = this.appName;
         headerText.appendChild(app);
 
         header.appendChild(headerText);
@@ -73,7 +73,7 @@ export class View {
         close.addEventListener('click', _ => { this.close() });
         buttons.appendChild(close);
 
-            // Close button
+            // Maximize button
         const maximize = document.createElement('button');
         maximize.classList = 'view buttons maximize';
         maximize.addEventListener('click', _ => { this.maximize() });
@@ -81,7 +81,7 @@ export class View {
 
         header.appendChild(buttons);
 
-        let pos = {x, y};
+        let pos = {x: 0, y: 0};
 
         header.addEventListener('mousedown', evt => {
             evt.preventDefault();
@@ -147,7 +147,6 @@ export class View {
 
         document.getElementsByTagName('main')[0].appendChild(container);
 
-        system.header.display.views().innerText = system.views.length;
 
     };
 
@@ -217,9 +216,13 @@ export class View {
         this.container.remove();
         const index = system.views.findIndex( ({ id }) => id === this.id );
         system.views.splice(index, 1);
-        system.header.display.views().innerText = system.views.length;
         if (system.views.length === 0) { system.lastZIndex = 0 };
 
     };
+
+    show() {
+        this.create();
+        this.open();
+    }
 
 };

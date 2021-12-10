@@ -43,7 +43,7 @@ div.view.header:active {
 }
 
 div.view.content {
-    background-color: blue; /* For testing puroposes */
+    background-color: var(--background); /* For testing puroposes */
     border: none;
     resize: both;
     min-width: 340px;
