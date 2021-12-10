@@ -1,5 +1,9 @@
+import * as shell from './shell.js';
+import * as api from './api.js';
+
+
 /* Apps */
-class App {
+export class App {
 
     ID = api.getUniqueID();
 
@@ -26,20 +30,27 @@ class App {
     };
 
     start = function () {
-        shell.error(`Tried to start ${this.properties.name}, but no start function defined!`);
+        shell.error(`No start script defined for app`);
     };
 
-    install() {
+    install(callback) {
         const js = this.sources.js;
         const css = this.sources.css;
 
         // Load JS
+        let notLoaded = [];
+        let loaded = [];
         js.forEach(file => {
             const el = document.createElement('script');
             el.src = file;
             el.async = false;
             el.defer = false;
             document.head.appendChild(el);
+            notLoaded.push(el);
+            el.onload = _ => {
+                notLoaded.splice(notLoaded.indexOf(el), 1);
+                loaded.push(el)
+            }
         });
 
         // Load CSS
@@ -50,10 +61,27 @@ class App {
             document.head.appendChild(el);
         });
 
-        // Add to installed apps
-        system.apps.push(this);
+        notLoaded.forEach(el => {
+            el.addEventListener('load', _ => {
+                if (loaded.length === js.length) {
 
-        shell.log(`App ${this.properties.name} v${this.properties.version} has been installed!`);
+                    // All scripts loaded
+                    if (callback !== undefined) { callback() }
+                    else { shell.error(`Callback not defined; Load script for ${this.properties.name}`) }
+
+                    // Add to installed apps
+                    
+                    system.apps.push(this);
+
+                    shell.log(`App ${this.properties.name} v${this.properties.version} has been installed!`);
+
+                };
+            });
+        });       
+    };
+
+    initialize(object, startFunc) {
+        this.start = object[startFunc];
     };
 
     remove() {

@@ -1,8 +1,8 @@
 /* Configuration */
-const config = [];
+export const config = [];
 
 /* Defaults */
-const defaults = [];
+export const defaults = [];
 
 defaults.viewWidth = 500;
 defaults.viewHeight = 500;

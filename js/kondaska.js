@@ -1,5 +1,10 @@
+/* Imports */
+import * as api from '../core/api.js';
+
+window.api = api;
+
 /* Generic */
-const system = [];
+window.system = [];
 system.version = {
     'state': 'Alpha',
     'version': '1.0.0'

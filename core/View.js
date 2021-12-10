@@ -1,5 +1,5 @@
 /* Views (window) */
-class View {
+export class View {
     constructor(name, app, content, properties) {
 
         if (typeof properties !== 'object') { throw new Error(`Properties is not an object or not defined`) };
@@ -81,7 +81,7 @@ class View {
 
         header.appendChild(buttons);
 
-        let pos = {};
+        let pos = {x, y};
 
         header.addEventListener('mousedown', evt => {
             evt.preventDefault();
