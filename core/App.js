@@ -27,6 +27,8 @@ export class App {
         if (properties !== undefined) { this.properties = {...this.properties, ...properties} };
         if (sources !== undefined) { this.sources = {...this.sources, ...sources} };
 
+        if (this.sources.icon === '') { this.sources.icon = './assets/default-icon.svg' };
+
         shell.log(`App ${this.properties.name} v${this.properties.version} has been created!`);
 
     };

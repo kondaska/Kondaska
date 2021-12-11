@@ -13,7 +13,7 @@ startmenu.getItems = _ => {
         el.classList.add('startmenu-item');
 
         const icon = document.createElement('img');
-        icon.src = './assets/default-icon.png';
+        icon.src = './assets/default-icon.svg';
         if (!item.icon) {};
 
         el.appendChild(icon);
