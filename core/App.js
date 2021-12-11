@@ -1,5 +1,7 @@
 import * as shell from './shell.js';
 import * as api from './api.js';
+import { TaskButton } from './TaskButton.js';
+import { StartmenuItem } from '../js/startmenu.js';
 
 
 /* Apps */
@@ -83,6 +85,9 @@ export class App {
 
     initialize(object, startFunc) {
         this.start = object[startFunc];
+        const taskbutton = new TaskButton(this);
+        taskbutton.create();
+        const menuItem = new StartmenuItem(this);
     };
 
     remove() {

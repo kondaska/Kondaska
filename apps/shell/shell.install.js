@@ -1,5 +1,4 @@
 import { App } from '../../core/App.js';
-import { TaskButton } from '../../core/TaskButton.js';
 
 function install() {
 
@@ -20,10 +19,8 @@ function install() {
 
     const app = new App(properties, sources);
     app.install(_ => {
-        // Set a start function
+        // Initialize the app
         app.initialize(shellApp, 'start');
-        const button = new TaskButton(app);
-        button.create();
     });
 };
 
